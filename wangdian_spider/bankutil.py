@@ -155,7 +155,7 @@ def request_util(method,url,column=None,node=None,node1=None,op=None,parm=None,p
         return data
 
 def request_util_html(method,url,parm=None,headers=None,data=None,node=None,column=None,op=None,_id=False,
-                      backlist=None,special_col=None,poi=None,readdress=None):
+                      backlist=None,special_col=None,poi=None,readdress=None,extra=None):
     out_dict = {}
     blist = []
     try:
@@ -177,6 +177,10 @@ def request_util_html(method,url,parm=None,headers=None,data=None,node=None,colu
          try:
              if _id:
                  o_dict['_id'] = uuid.uuid1()  # ObjectId(bytes(str(round(time.time()*100)).encode('utf-8')))
+             if extra is not None:
+                 if isinstance(extra, dict):
+                     for e_ in extra:
+                         o_dict[e_] = extra[e_]
              if column is not None:
                  if isinstance(column, dict):
                      for c_ in column:
